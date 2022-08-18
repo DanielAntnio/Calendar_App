@@ -1,0 +1,1 @@
+export { WeekDaysHeader } from './weekDaysHeader'
