@@ -1,3 +1,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+}
+
+#screen {
+    grid-template-areas: 
+        "header header" 
+        "aside main"
+        "footer footer"
+    ;
+    grid-template-columns: 16rem 1fr;
+    grid-template-rows: 2rem 1fr 2rem
+}
+
+#header {
+    grid-area: header;
+}
+
+#aside {
+    grid-area: aside;
+}
+
+#main {
+    grid-area: main;
+}
+
+#footer {
+    grid-area: footer;
+}
