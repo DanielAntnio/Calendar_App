@@ -1,10 +1,9 @@
 {
   "name": "calendar_app",
   "private": true,
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "calendar_app",
   "type": "module",
-  "main": "public/main.cjs",
   "homepage": "./",
   "scripts": {
     "dev": "vite --port 3000",
