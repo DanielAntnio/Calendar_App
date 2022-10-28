@@ -15,8 +15,8 @@ export function DayFormat() {
         if (timeval.length !== 10) window.location.pathname = '/day'
 
         for (let i = 0; i < 10; i++) {
-            const isValid = ((i === 2 || i === 5) && timeval.charAt(i) !== '-') || parseInt(timeval.charAt(i)) === NaN
-            if (isValid) window.location.pathname = '/day';
+            const verify = ((i === 2 || i === 5) && timeval.charAt(i) !== '-') || ((i !== 2 && i !== 5) && isNaN(parseInt(timeval.charAt(i))))
+            if (verify) window.location.pathname = '/day'
         }
 
         const [dayVal, monthVal, yearVal] = timeval.split('-')

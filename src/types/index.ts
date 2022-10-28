@@ -47,12 +47,12 @@ export type weekDayProps = {
 
 export type Time = {
     year: number,
-    month: MonthNumbers,
-    day: DayNumbers
+    month: MonthNumbers | number,
+    day: DayNumbers | number
 }
 export type Hour = {
-    hour: HourNumbers,
-    minute: SecondNumbers
+    hour: HourNumbers | number,
+    minute: SecondNumbers | number
 }
 
 export type dayDate = {
