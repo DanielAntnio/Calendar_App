@@ -11,7 +11,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview --port 3000",
     "css": "npx tailwindcss -i ./src/input.css -o ./dist/output.css",
-    "deploy": "npm run build && npm run css"
+    "deploy": "DISABLE_ESLINT_PLUGIN=true npm run build && npm run css"
   },
   "author": "Daniel Antônio",
   "license": "ISC",
