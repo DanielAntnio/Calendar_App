@@ -44,5 +44,8 @@
   "repository": "https://github.com/DanielAntnio/Calendar-App.git",
   "workspaces": [
     "./src"
-  ]
+  ],
+  "engines": {
+    "node": "16.x"
+  }
 }
