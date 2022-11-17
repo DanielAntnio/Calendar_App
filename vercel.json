@@ -1,8 +1,8 @@
 {
   "rewrites": [
-    { "source": "/", "destination": "/" },
-    { "source": "/sigin", "destination": "/sigin" },
-    { "source": "/login", "destination": "/profile.html" },
-    { "source": "/day", "destination": "/day" },
+    { "source": "/", "destination": "https://calendarappdaon-nyqmuhjrq-danielantnio.vercel.app/" },
+    { "source": "/sigin", "destination": "https://calendarappdaon-nyqmuhjrq-danielantnio.vercel.app/sigin" },
+    { "source": "/login", "destination": "https://calendarappdaon-nyqmuhjrq-danielantnio.vercel.app/login" },
+    { "source": "/fgtPss", "destination": "https://calendarappdaon-nyqmuhjrq-danielantnio.vercel.app/fgtPss" },
   ]
 }
