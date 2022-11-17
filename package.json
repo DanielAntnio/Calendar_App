@@ -1,6 +1,6 @@
 {
   "name": "calendar_app",
-  "private": false,
+  "private": true,
   "version": "1.0.3",
   "description": "calendar_app",
   "type": "module",
