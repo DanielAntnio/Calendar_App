@@ -22,7 +22,7 @@ export function WeekFormat() {
 
     const time = GetTime()
 
-    const TwoDigitFormat = (value: number) => value > 10 ? value : '0' + value 
+    const TwoDigitFormat = (value: number) => value >= 10 ? value : '0' + value 
 
     function newWeek(count: number) {
         const { year, weekNumber } = GetDate(time.year, time.month, time.day).plus({ day: count })

@@ -23,7 +23,7 @@ export function MonthFormat() {
 
     const time = GetTime()
 
-    const TwoDigitFormat = (value: number) => value > 10 ? value : '0' + value 
+    const TwoDigitFormat = (value: number) => value >= 10 ? value : '0' + value 
 
     function newMonth(count: number) {
         const { month, year } = GetDate(time.year, time.month).plus({ month: count })

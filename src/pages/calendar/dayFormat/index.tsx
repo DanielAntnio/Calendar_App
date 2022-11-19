@@ -27,7 +27,7 @@ export function DayFormat() {
 
     const time = GetTime()
 
-    const TwoDigitFormat = (value: number) => value > 10 ? value : '0' + value 
+    const TwoDigitFormat = (value: number) => value >= 10 ? value : '0' + value 
 
     function newDay(count: number) {
         const { day, month, year } = GetDate(time.year, time.month, time.day).plus({ day: count })
