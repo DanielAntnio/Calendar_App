@@ -7,14 +7,13 @@ import { Time } from "../../../types"
 import { GetDate } from "../../../utils/getDate"
 
 export function DayFormat() {
-    const { timeval } = useParams()
-
     function GetTime(): Time {
+        const { timeval } = useParams()
         if (!timeval) return { day: GetDate().day, month: GetDate().month, year: GetDate().year }
 
-        if (timeval.length !== 10) window.location.pathname = '/day'
+        if (timeval.length > 10) window.location.pathname = '/day'
 
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < timeval.length; i++) {
             const verify = ((i === 2 || i === 5) && timeval.charAt(i) !== '-') || ((i !== 2 && i !== 5) && isNaN(parseInt(timeval.charAt(i))))
             if (verify) window.location.pathname = '/day'
         }
@@ -28,12 +27,12 @@ export function DayFormat() {
 
     const time = GetTime()
 
-    const TDF = (value: number) => value > 9 ? value : '0' + value //TwoDigitFormat  
+    const TwoDigitFormat = (value: number) => value > 10 ? value : '0' + value 
 
     function newDay(count: number) {
         const { day, month, year } = GetDate(time.year, time.month, time.day).plus({ day: count })
         if (day === GetDate().day && month === GetDate().month && year === GetDate().year) return window.location.pathname = "day"
-        window.location.pathname = `day/${TDF(day)}-${TDF(month)}-${year}`
+        window.location.pathname = `day/${TwoDigitFormat(day)}-${TwoDigitFormat(month)}-${year}`
     }
 
     return (

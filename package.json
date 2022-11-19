@@ -1,7 +1,7 @@
 {
   "name": "calendar_app",
-  "private": true,
-  "version": "1.0.3",
+  "private": false,
+  "version": "1.0.6",
   "description": "calendar_app",
   "type": "module",
   "homepage": "./",
@@ -11,7 +11,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview --port 3000",
     "css": "npx tailwindcss -i ./src/input.css -o ./dist/output.css",
-    "deploy": "npm run build && npm run css"
+    "deploy": "npm run css && npm run build"
   },
   "author": "Daniel Antônio",
   "license": "ISC",

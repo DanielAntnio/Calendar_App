@@ -1,6 +1,6 @@
 // export type ClassName = string
 
-import { DayNumbers, HourNumbers, MonthNumbers, SecondNumbers } from "luxon"
+import { DayNumbers, HourNumbers, MonthNumbers, SecondNumbers, WeekNumbers } from "luxon"
 
 export type ShowCalendar = {
     Day: boolean,
