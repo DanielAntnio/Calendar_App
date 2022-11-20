@@ -1,11 +1,9 @@
-import { useState } from "react"
 import { useParams } from "react-router-dom"
 import { CalendarHeader } from "../../../components/calendarHeader"
 import { Day } from "../../../components/day"
 import { ListOfEvents } from "../../../components/listOfEvents"
 import { Time } from "../../../types"
 import { GetDate } from "../../../utils/getDate"
-import { TwoDigitFormat } from "../../../utils/twoDigitFormat"
 
 export function DayFormat() {
     function GetTime(): Time {
@@ -25,6 +23,8 @@ export function DayFormat() {
 
         return { day, month, year }
     }
+
+    const TwoDigitFormat = (num: number) => num.toString().length == 2 ? num : '0' + num
 
     const time = GetTime()
 

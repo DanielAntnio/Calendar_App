@@ -3,13 +3,11 @@ import { Footer } from "../components/footer";
 import { Header } from "../components/header";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase";
-import { lazy } from "react"
-
-const LogIn = lazy(() => import("../pages/logIn").then(({ LogIn }) => ({ default: LogIn })))
-const SignIn = lazy(() => import("../pages/singIn").then(({ SignIn }) => ({ default: SignIn })))
-const ForgetPassword = lazy(() => import("../pages/forgetPassword").then(({ ForgetPassword }) => ({ default: ForgetPassword })))
-const PageRoutes = lazy(() => import("./index.routes").then(({ PageRoutes }) => ({ default: PageRoutes })))
-const NotFound = lazy(() => import("../pages/notFound").then(({ NotFound }) => ({ default: NotFound })))
+import { LogIn } from "../pages/logIn";
+import { SignIn } from "phosphor-react";
+import { ForgetPassword } from "../pages/forgetPassword";
+import { NotFound } from "../pages/notFound";
+import { PageRoutes } from "./index.routes";
 
 export const AuthRoutes = () => {
   const path = window.location.pathname

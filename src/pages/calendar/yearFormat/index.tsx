@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom"
 import { CalendarHeader } from "../../../components/calendarHeader"
 import { Month } from "../../../components/month"
 import { GetDate } from "../../../utils/getDate"
-import { TwoDigitFormat } from "../../../utils/twoDigitFormat"
 
 
 export function YearFormat() {
@@ -23,6 +22,8 @@ export function YearFormat() {
         if (yearval == GetDate().year) return window.location.pathname = "calendar/year"
         window.location.pathname = `calendar/year/${yearval}`
     }
+
+    const TwoDigitFormat = (num: number) => num.toString().length == 2 ? num : '0' + num
 
     return (
         <div className="flex items-center justify-center flex-col h-full w-full">

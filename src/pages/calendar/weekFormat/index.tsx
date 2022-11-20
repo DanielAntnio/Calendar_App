@@ -6,7 +6,6 @@ import { Week } from "../../../components/week"
 import { Time } from "../../../types"
 import { GetDate } from "../../../utils/getDate"
 import { GetWeekDays } from "../../../utils/getWeekDays"
-import { TwoDigitFormat } from "../../../utils/twoDigitFormat"
 
 export function WeekFormat() {
     function GetTime(): Time {
@@ -33,6 +32,8 @@ export function WeekFormat() {
         if ( year === GetDate().plus({ day: 1 }).year && weekNumber === GetDate().plus({ day: 1 }).weekNumber ) return window.location.pathname = "calendar/week"
         window.location.pathname = `calendar/week/${TwoDigitFormat(weekNumber)}-${year}`
     }
+
+    const TwoDigitFormat = (num: number) => num.toString().length == 2 ? num : '0' + num
 
     return (
         <div className="flex items-center justify-center flex-col h-full w-full">

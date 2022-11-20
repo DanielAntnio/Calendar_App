@@ -23,13 +23,14 @@ export function MonthFormat() {
 
     const time = GetTime()
 
-    const TwoDigitFormat = (value: number) => value >= 10 ? value : '0' + value 
+    const TwoDigitFormat = (num: number) => num.toString().length == 2 ? num : '0' + num
 
     function newMonth(count: number) {
         const { month, year } = GetDate(time.year, time.month).plus({ month: count })
         if (month === GetDate().month && year === GetDate().year) return window.location.pathname = '/calendar/month'
         window.location.pathname = `/calendar/month/${TwoDigitFormat(month)}-${year}`
     }
+    
 
     return (
         <div className="flex items-center justify-center flex-col h-full w-full">
