@@ -8,11 +8,11 @@ export function MonthFormat() {
     function GetTime(){
         const { timeval } = useParams()
         if (!timeval) return { month: GetDate().month, year: GetDate().year }
-        if (timeval.length > 7) window.location.pathname = '/month'
+        if (timeval.length > 7) window.location.pathname = 'calendar/month'
 
         for (let char = 0; char < timeval.length; char++) {
             const verify = (char == 2 && timeval.charAt(char) !== '-') || (char != 2 && isNaN(parseInt(timeval.charAt(char))))
-            if (verify) window.location.pathname = '/month'
+            if (verify) window.location.pathname = 'calendar/month'
         }
 
         const [ monthVal, yearVal ] = timeval.split('-')
@@ -27,9 +27,8 @@ export function MonthFormat() {
 
     function newMonth(count: number) {
         const { month, year } = GetDate(time.year, time.month).plus({ month: count })
-        console.log(month, year)
-        if (month === GetDate().month && year === GetDate().year) return window.location.pathname = '/month'
-        window.location.pathname = `/month/${TwoDigitFormat(month)}-${year}`
+        if (month === GetDate().month && year === GetDate().year) return window.location.pathname = '/calendar/month'
+        window.location.pathname = `/calendar/month/${TwoDigitFormat(month)}-${year}`
     }
 
     return (

@@ -1,7 +1,7 @@
 {
   "name": "calendar_app",
   "private": false,
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "calendar_app",
   "type": "module",
   "homepage": "./",
@@ -10,8 +10,7 @@
     "dev-css": " npx tailwindcss -i ./src/input.css -o ./dist/output.css --watch",
     "build": "tsc && vite build",
     "preview": "vite preview --port 3000",
-    "css": "npx tailwindcss -i ./src/input.css -o ./dist/output.css",
-    "deploy": "npm run css && npm run build"
+    "css": "npx tailwindcss -i ./src/input.css -o ./dist/output.css"
   },
   "author": "Daniel Antônio",
   "license": "ISC",

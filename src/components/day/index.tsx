@@ -17,11 +17,10 @@ export function Day({ time, className, format }: DayProps) {
         return null
     }
 
-    const TDF = (value: number) => value > 9 ? value : '0' + value //TwoDigitFormat  
+    const TwoDigitFormat = (value: number) => value > 9 ? value : '0' + value  
 
     function handleOpenDay() {
-        if(format === "day") return;
-        window.location.pathname = `day/${TDF(time.day)}-${TDF(time.month)}-${time.year}`
+        if(format !== "day") window.location.pathname = `calendar/day/${TwoDigitFormat(time.day)}-${TwoDigitFormat(time.month)}-${time.year}`
     }
 
     return (

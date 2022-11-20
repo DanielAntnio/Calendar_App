@@ -3,13 +3,14 @@ import { useParams } from "react-router-dom"
 import { CalendarHeader } from "../../../components/calendarHeader"
 import { Month } from "../../../components/month"
 import { GetDate } from "../../../utils/getDate"
+import { TwoDigitFormat } from "../../../utils/twoDigitFormat"
 
 
 export function YearFormat() {
     function GetTime() {
         const { timeval } = useParams()
         if (timeval == null) return GetDate().year
-        if (timeval.length > 4 || isNaN(parseInt(timeval))) window.location.pathname = '/year'
+        if (timeval.length > 4 || isNaN(parseInt(timeval))) window.location.pathname = 'calendar/year'
         return GetDate(parseInt(timeval)).year
     }
 
@@ -19,8 +20,8 @@ export function YearFormat() {
 
     function newYear(count: number){
         const yearval = GetDate(year).plus({ year: count }).year
-        if (yearval == GetDate().year) return window.location.pathname = "/year"
-        window.location.pathname = `/year/${yearval}`
+        if (yearval == GetDate().year) return window.location.pathname = "calendar/year"
+        window.location.pathname = `calendar/year/${yearval}`
     }
 
     return (
@@ -37,7 +38,7 @@ export function YearFormat() {
                             <li key={index} className="w-full h-full flex flex-col" >
                                 <div 
                                     className="bg-slate-500 dark:bg-slate-600 w-full justify-between items-center border-2 border-solid border-slate-600 dark:border-slate-900 hover:opacity-70 cursor-pointer"
-                                    onClick={() => window.location.pathname = `/month/${month > 10 ? month : '0' + month }-${year}`}
+                                    onClick={() => window.location.pathname = `/calendar/month/${TwoDigitFormat(month)}-${year}`}
                                 >
                                     <h3 className='text-slate-200 text-center'>{GetDate(year, month).monthLong}</h3>
                                 </div>

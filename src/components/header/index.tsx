@@ -7,14 +7,10 @@ import { SignOutFunction } from "../../services/signOut";
 export function Header() {
     const { theme, setTheme } = useTheme()
     const [userName, setUserName] = useState<string | null>(null)
-    const [isLog, setIsLog] = useState<boolean>(false)
 
     useEffect(() => {
         auth.onAuthStateChanged(user => {
-            if (user) {
-                setUserName(user.displayName)
-                setIsLog(true)
-            }
+            if (user) setUserName(user.displayName === null ? "Usúario Indefinido!" : user.displayName)
         })
     }, [])
 
@@ -24,7 +20,7 @@ export function Header() {
                 Calendar
             </h2>
             <div className="flex items-center justify-center">
-                {isLog ? <h3>{userName ? userName : "Usúario Indefinido!"}</h3> : null}
+                {userName !== null ? <h3>{userName}</h3> : null}
                 <button
                     type="button"
                     className="transition-all rounded-xl h-6 w-6 flex items-center justify-center ml-2"
@@ -33,8 +29,7 @@ export function Header() {
                 >
                     {theme !== 'Light' ? (<Moon size={18} />) : (<Sun size={18} />)}
                 </button>
-                {!isLog ? null
-                    : <SignOut size={18} className="ml-2 cursor-pointer" onClick={() => SignOutFunction()} />
+                {userName === null ? null : <SignOut size={18} className="ml-2 cursor-pointer" onClick={() => SignOutFunction()} />
                 }
             </div>
         </header>

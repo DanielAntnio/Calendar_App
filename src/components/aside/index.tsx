@@ -4,19 +4,19 @@ export function Aside() {
     const timeCalendarNav = [
         {
             name: "Dia",
-            link: "/day"
+            link: "/calendar/day"
         },
         {
             name: "Semana",
-            link: "/week"
+            link: "/calendar/week"
         },
         {
             name: "Mês",
-            link: "/month"
+            link: "/calendar/month"
         },
         {
             name: "Ano",
-            link: "/year"
+            link: "/calendar/year"
         }
     ]
 
@@ -27,7 +27,12 @@ export function Aside() {
                 {
                     timeCalendarNav.map((value, index) => {
                         function href() {
-                            if (window.location.pathname === value.link) return;
+                            let path = window.location.pathname
+                            if ((path.match(/\//g) || []).length > 2){
+                                const position = path.indexOf("/", value.link.length - 1)
+                                path = path.slice(0, position)
+                            }
+                            if (path === value.link) return window.location.pathname = "calendar";
                             window.location.pathname = value.link
                         }
                         return (

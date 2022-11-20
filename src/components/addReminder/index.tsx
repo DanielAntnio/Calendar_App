@@ -18,10 +18,10 @@ export function AddReminder() {
 
     const userId = getAuth(app).currentUser?.uid
 
-    const TDF = (value: number) => value < 10 ? '0' + value : value //TwoDigitFormat
+    const TwoDigitFormat = (value: number) => value < 10 ? '0' + value : value 
 
-    const defaultDay = `${GetDate().year}-${TDF(GetDate().month)}-${TDF(GetDate().day)}`
-    const defaultValue = (number: number) => `${defaultDay}T${TDF(GetDate().hour + number)}:00`
+    const defaultDay = `${GetDate().year}-${TwoDigitFormat(GetDate().month)}-${TwoDigitFormat(GetDate().day)}`
+    const defaultValue = (number: number) => `${defaultDay}T${TwoDigitFormat(GetDate().hour + number)}:00`
 
     OnClickOut(formRef, () => setHidden(true))
 
@@ -52,7 +52,7 @@ export function AddReminder() {
 
         const { Day, Hour } = TimeFormat(e)
         const { year, month, day, hour, minute } = GetDate(Day.year, Day.month, Day.day, Hour.hour, Hour.minute).plus({ hour: 1 })
-        const timeString = `${TDF(year)}-${TDF(month)}-${TDF(day)}T${TDF(hour)}:${TDF(minute)}`
+        const timeString = `${TwoDigitFormat(year)}-${TwoDigitFormat(month)}-${TwoDigitFormat(day)}T${TwoDigitFormat(hour)}:${TwoDigitFormat(minute)}`
 
         endRef.current.value = timeString
     }
@@ -73,7 +73,7 @@ export function AddReminder() {
 
         const { Day, Hour } = TimeFormat(e)
         const { year, month, day, hour, minute } = GetDate(Day.year, Day.month, Day.day, Hour.hour, Hour.minute).plus({ hour: -1 })
-        const timeString = `${TDF(year)}-${TDF(month)}-${TDF(day)}T${TDF(hour)}:${TDF(minute)}`
+        const timeString = `${TwoDigitFormat(year)}-${TwoDigitFormat(month)}-${TwoDigitFormat(day)}T${TwoDigitFormat(hour)}:${TwoDigitFormat(minute)}`
 
         startRef.current.value = timeString
     }
@@ -81,7 +81,7 @@ export function AddReminder() {
     return (
         <div className="absolute right-4 bottom-4">
             { hidden ? null :
-                <form onSubmit={handleNewEvent} className="flex flex-col p-4 bg-slate-400 dark:bg-slate-900/20 rounded-xl" ref={formRef}>
+                <form onSubmit={handleNewEvent} className="flex flex-col p-4 bg-slate-400 dark:bg-slate-800 rounded-xl" ref={formRef}>
                 <div className="border-b-2 border-solid px-2 border-gray-600">
                     <input
                         type="text"
@@ -100,8 +100,8 @@ export function AddReminder() {
                         defaultValue="#434DD0"
                         ref={colorRef}
                     />
-                    <label className="mx-2 text-slate-100" htmlFor="start" >Data de Inicio</label>
-                    <label className="mx-2 text-slate-100" htmlFor="end" >Data de Fim</label>
+                    <label className="mx-2 text-slate-100" htmlFor="start">Data de Inicio</label>
+                    <label className="mx-2 text-slate-100" htmlFor="end">Data de Fim</label>
                     <input
                         type="datetime-local"
                         id="start"
