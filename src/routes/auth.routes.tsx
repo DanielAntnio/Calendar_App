@@ -3,8 +3,9 @@ import { Footer } from "../components/footer";
 import { Header } from "../components/header";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase";
+import { SignIn } from "../pages/signIn"
 import { LogIn } from "../pages/logIn";
-import { SignIn } from "phosphor-react";
+
 import { ForgetPassword } from "../pages/forgetPassword";
 import { NotFound } from "../pages/notFound";
 import { PageRoutes } from "./index.routes";
