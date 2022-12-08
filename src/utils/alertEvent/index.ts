@@ -12,10 +12,9 @@ export function AlertEvent(time: Time) {
   const delay = MINUTE_MS - (1000 * GetDate().second)
 
   function alertEvent() {
-    console.log(events)
     events.forEach(event => {
       const { hour, minute } = event.start.Hour
-      if(hour === GetDate().hour && minute === GetDate().minute) alert(`O evento ${event.tittle} se iniciou.`)
+      if(hour === GetDate().hour && minute === GetDate().minute) alert(`O evento ${event.title} se iniciou.`)
     });
   }
 

@@ -45,7 +45,7 @@ export function SignIn() {
 
   return (
     <main className="flex flex-1 justify-center items-center h-full w-full bg-slate-200 dark:bg-gray-700">
-      <div className="bg-slate-300 dark:bg-gray-800/50 text-black dark:text-gray-100 rounded-sm w-96 pb-8 m-8">
+      <section className="bg-slate-300 dark:bg-gray-800/50 text-black dark:text-gray-100 rounded-sm w-96 pb-8 m-8">
         <form onSubmit={handleLogIn} className="flex flex-col justify-center items-center ">
           <h2 className="m-4 font-extrabold text-2xl" >SignIn</h2>
           <div className="mb-4 h-8 w-64 rounded-sm flex flex-row items-center border-b-2 border-solid border-gray-400">
@@ -93,7 +93,7 @@ export function SignIn() {
             </a>
           </div>
         </form>
-      </div>
+      </section>
     </main>
   )
 }

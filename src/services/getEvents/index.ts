@@ -11,7 +11,7 @@ import {
 import { useState, useEffect } from "react";
 import { db, app } from "../../firebase";
 import { CalendarEvent } from "../../types";
-import { TimeFormat } from "../../utils/timeFormat";
+import { TimeFormat } from "../../utils/timeFormat/default";
 
 export function GetEvents() {
   const [events, setEvents] = useState<CalendarEvent[]>([]);
@@ -28,16 +28,16 @@ export function GetEvents() {
 
   useEffect(() => {
     const q: Query<DocumentData> =
-      userId !== undefined && userId
+      userId
         ? query(docRef, where("userId", "==", userId))
         : query(docRef);
 
     async function GetEvents() {
       const data = await getDocs(q);
-      const events = data.docs.map((doc) => {
-        const { tittle, color, start, end } = doc.data();
+      const events: CalendarEvent[] = data.docs.map((doc) => {
+        const { title, color, start, end } = doc.data();
         return {
-          tittle,
+          title,
           color,
           start: TimeFormat(start),
           end: TimeFormat(end),

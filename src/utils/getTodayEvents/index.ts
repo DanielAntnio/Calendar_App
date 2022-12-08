@@ -1,29 +1,22 @@
 import { GetEvents } from "../../services/getEvents";
-import { CalendarEvent, Time } from "../../types";
+import { CalendarEvent, dayDate, Time } from "../../types";
+import { GetTime } from "../getTime";
+import { GetTimeByDayDate } from "../getTimeByDayDate";
 
 export function GetTodayEvents(time: Time): CalendarEvent[] {
   const events = GetEvents()
 
-  if(events.length === 0) return []
+  if (events.length === 0) return []
 
   const filteredEvents = events.filter((event) => {
-    const dayCheck =
-      event.start.Day.day <= time.day && event.end.Day.day >= time.day;
-    const monthCheck =
-      event.start.Day.month <= time.month && event.end.Day.month >= time.month;
-    const yearCheck =
-      event.start.Day.year <= time.year && event.end.Day.year >= time.year;
+    const start = GetTime(event.start.Day.year, event.start.Day.month, event.start.Day.day)
+    const end = GetTime(event.end.Day.year, event.end.Day.month, event.end.Day.day)
+    const now = GetTime(time.year, time.month, time.day)
 
-    return dayCheck && monthCheck && yearCheck;
+    return start <= now && now <= end
   });
 
-  const eventsInOrder = filteredEvents.sort((a, b) => {
-    return (
-      a.start.Hour.hour +
-      a.start.Hour.minute / 60 -
-      (b.start.Hour.hour + b.start.Hour.minute / 60)
-    );
-  });
+  const eventsInOrder = filteredEvents.sort((eventOne, eventTwo) => GetTimeByDayDate(eventOne.start) - GetTimeByDayDate(eventTwo.start));
 
   return eventsInOrder;
 }

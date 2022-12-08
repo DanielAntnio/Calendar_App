@@ -14,7 +14,7 @@ export function NotFound(){
     return (
         <main className="flex flex-1 p-10 justify-center items-center h-full w-full bg-slate-200 dark:bg-gray-700 select-none">
             <SmileyXEyes className="m-4" size={256} />
-            <div className="flex flex-col justify-center text-center">
+            <section className="flex flex-col justify-center text-center">
                 <h1 className="text-xl">A pagina que você tentou acessar não está disponivel ou não existe</h1>
                 <nav className="flex flex-row justify-center text-center text-lg">
                     <span className="mr-1" >Voltar para a pagina </span>
@@ -25,7 +25,7 @@ export function NotFound(){
                             dark:text-slate-300 dark:border-slate-300 dark:hover:text-slate-200 dark:hover:border-slate-200"
                     >{path === "calendar" ? "Home" : "LogIn"}</a>
                 </nav>
-            </div>
+            </section>
         </main>
     )
 }

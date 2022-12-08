@@ -6,7 +6,7 @@ export async function SetNewEvent(props: NewEvent) {
     const docRef = collection(db, "events")
 
     const newDoc = {
-        tittle: props.tittle,
+        title: props.title,
         color: props.color,
         start: props.start,
         end: props.end,

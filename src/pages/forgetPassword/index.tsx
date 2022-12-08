@@ -30,7 +30,7 @@ export function ForgetPassword() {
 
   return (
     <main className="flex flex-1 justify-center items-center h-full w-full bg-slate-200 dark:bg-gray-700 select-none">
-      <div className="bg-slate-300 dark:bg-gray-800/50 text-black dark:text-gray-100 rounded-lg w-96 pb-8 m-8">
+      <section className="bg-slate-300 dark:bg-gray-800/50 text-black dark:text-gray-100 rounded-lg w-96 pb-8 m-8">
         <form onSubmit={sendEmail} className="flex flex-col justify-center items-center ">
           <h2 className="m-4 font-extrabold text-2xl" >Redefinir senha</h2>
           <div className="border-b-2 border-solid border-gray-400 mb-4 h-8 w-64 rounded-sm flex flex-row items-center">
@@ -57,7 +57,7 @@ export function ForgetPassword() {
             </a>
           </div>
         </form>
-      </div>
+      </section>
     </main>
   )
 }

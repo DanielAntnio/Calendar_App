@@ -1,7 +1,7 @@
 import { DateTime } from "luxon"
 import { useParams } from "react-router-dom"
 import { CalendarHeader } from "../../../components/calendarHeader"
-import { ListOfEvents } from "../../../components/listOfEvents"
+import { ListOfEvents } from "../../../components/event/listOfEvents"
 import { Week } from "../../../components/week"
 import { Time } from "../../../types"
 import { GetDate } from "../../../utils/getDate"
@@ -22,6 +22,10 @@ export function WeekFormat() {
             weekYear: parseInt(yearVal),
             weekNumber: weekNumber
         }).plus({ day: -1 });
+
+        if (GetDate(year, month, day).plus({ day: 6 }).year < 1902) window.location.pathname = "calendar/week/01-1902"
+        if (year > 2100) window.location.pathname = "calendar/week/52-2100"
+
         return { day, month, year }
     }
 
@@ -30,24 +34,32 @@ export function WeekFormat() {
     function newWeek(count: number) {
         const { year, weekNumber } = GetDate(time.year, time.month, time.day).plus({ day: count })
         if ( year === GetDate().plus({ day: 1 }).year && weekNumber === GetDate().plus({ day: 1 }).weekNumber ) return window.location.pathname = "calendar/week"
+        if (year < 1902) return window.location.pathname = "calendar/week/01-1902"
+        if (year > 2100) return window.location.pathname = "calendar/week/52-2100"
         window.location.pathname = `calendar/week/${TwoDigitFormat(weekNumber)}-${year}`
     }
 
     const TwoDigitFormat = (num: number) => num.toString().length == 2 ? num : '0' + num
 
+    const DayString = (time: Time, count: number) => {
+        const { year, weekNumber } = GetDate(time.year, time.month, time.day).plus({ day: count })
+        return `${TwoDigitFormat(weekNumber)}-${year}`
+    }
+
     return (
-        <div className="flex items-center justify-center flex-col h-full w-full">
+        <section className="flex items-center justify-center flex-col h-full w-full overflow-x-scroll">
             <CalendarHeader
                 value={`${GetDate(time.year, time.month, time.day).monthLong}/${time.year}`}
                 nextItem={() => newWeek(8)}
                 lastItem={() => newWeek(-6)}
+                disableLast={DayString(time, 6) === "01-1902"}
+                disableNext={DayString(time, 0) === "51-2100"}
             />
+
             <Week days={GetWeekDays(time)} showWeekday={true} format="week" />
             <div className="flex flex-row h-full w-full">
-                {
-                    GetWeekDays(time).map((day, index) => <ListOfEvents {...day} key={index} />)
-                }
+                { GetWeekDays(time).map((day, index) => <ListOfEvents {...day} key={index} />) }
             </div>
-        </div>
+        </section>
     )
 }

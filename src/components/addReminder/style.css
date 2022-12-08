@@ -1,0 +1,20 @@
+#formContainer {
+    grid-template-areas: 
+    "allDay allDay" 
+    "start end";
+
+    grid-template-rows: auto 1fr;
+    grid-template-columns: 1fr 1fr;
+}
+
+#allDay {
+    grid-area: allDay;
+}
+
+#start {
+    grid-area: start;
+}
+
+#end {
+    grid-area: end;
+}

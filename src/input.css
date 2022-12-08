@@ -8,11 +8,12 @@
 
 ::-webkit-scrollbar {
     width: 0px;
+    display: none;
 }
 
 #screen {
-    grid-template-areas: 
-        "header header" 
+    grid-template-areas:
+        "header header"
         "aside main"
         "footer footer"
     ;
@@ -20,18 +21,10 @@
     grid-template-rows: 2rem 1fr 2rem
 }
 
-#header {
-    grid-area: header;
-}
+#header { grid-area: header }
 
-#aside {
-    grid-area: aside;
-}
+#aside { grid-area: aside }
 
-#main {
-    grid-area: main;
-}
+#main { grid-area: main }
 
-#footer {
-    grid-area: footer;
-}
+#footer { grid-area: footer }
