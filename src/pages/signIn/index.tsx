@@ -3,7 +3,7 @@ import { createUserWithEmailAndPassword, getAuth, updateProfile } from 'firebase
 import { useRef } from "react";
 import { app } from "../../firebase";
 
-export function SingIn() {
+export function SignIn() {
   const emailRef = useRef<HTMLInputElement>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
   const nameRef = useRef<HTMLInputElement>(null)
