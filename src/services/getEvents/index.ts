@@ -5,50 +5,40 @@ import {
   DocumentData,
   query,
   where,
-  getDocs,
-  onSnapshot,
+  getDocs
 } from "firebase/firestore";
-import { useState, useEffect } from "react";
 import { db, app } from "../../firebase";
 import { CalendarEvent } from "../../types";
 import { TimeFormat } from "../../utils/timeFormat/default";
 
-export function GetEvents() {
-  const [events, setEvents] = useState<CalendarEvent[]>([]);
+export async function GetEvents() {
   const docRef = collection(db, "events");
   const auth = getAuth(app);
 
-  let userId: string | null = null
+  let userId: string | null = null;
 
-  useEffect(() => {
-    auth.onAuthStateChanged((user) => {
-      if (user) userId = user.uid;
+  auth.onAuthStateChanged((user) => {
+    if (user) userId = user.uid;
+  });
+
+  const q: Query<DocumentData> = userId
+    ? query(docRef, where("userId", "==", userId))
+    : query(docRef);
+
+  // async function GetEventsOnce() {
+    const data = await getDocs(q);
+    const events: CalendarEvent[] = data.docs.map((doc) => {
+      const { title, color, start, end } = doc.data();
+      return {
+        title,
+        color,
+        start: TimeFormat(start),
+        end: TimeFormat(end),
+        id: doc.id,
+      };
     });
-  }, [events]);
+    return events;
+  // }
 
-  useEffect(() => {
-    const q: Query<DocumentData> =
-      userId
-        ? query(docRef, where("userId", "==", userId))
-        : query(docRef);
-
-    async function GetEvents() {
-      const data = await getDocs(q);
-      const events: CalendarEvent[] = data.docs.map((doc) => {
-        const { title, color, start, end } = doc.data();
-        return {
-          title,
-          color,
-          start: TimeFormat(start),
-          end: TimeFormat(end),
-          id: doc.id,
-        };
-      });
-      setEvents(events);
-    }
-
-    onSnapshot(q, () => GetEvents());
-  }, [userId]);
-
-  return events
+  // onSnapshot(q, GetEventsOnce)
 }

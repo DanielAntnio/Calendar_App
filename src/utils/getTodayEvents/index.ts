@@ -3,8 +3,8 @@ import { CalendarEvent, dayDate, Time } from "../../types";
 import { GetTime } from "../getTime";
 import { GetTimeByDayDate } from "../getTimeByDayDate";
 
-export function GetTodayEvents(time: Time): CalendarEvent[] {
-  const events = GetEvents()
+export async function GetTodayEvents(time: Time): Promise<CalendarEvent[]> {
+  const events = await GetEvents()
 
   if (events.length === 0) return []
 

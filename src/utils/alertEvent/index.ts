@@ -1,9 +1,17 @@
+import { useEffect, useState } from "react";
 import { CalendarEvent, Time } from "../../types"
 import { GetDate } from "../getDate"
 import { GetTodayEvents } from "../getTodayEvents";
 
 export function AlertEvent(time: Time) {
-  const events: CalendarEvent[] = GetTodayEvents(time)
+  const [ events, setEvents ]= useState<CalendarEvent[]>([])
+
+  useEffect(() => {
+    async function getEvents() {
+      setEvents(await GetTodayEvents(time))
+    }
+    getEvents()
+  }, [])
 
   if (events.length === 0) return;
 

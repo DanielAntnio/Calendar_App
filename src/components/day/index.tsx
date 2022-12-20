@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react"
+import Loading from "react-loading"
 import { GetHolidays } from "../../services/getHolidays"
 import { DayProps } from "../../types"
 import { GetDate } from "../../utils/getDate"
@@ -20,7 +22,21 @@ export function Day({ time, className, format }: DayProps) {
 
     const TwoDigitFormat = (value: number) => value > 9 ? value : '0' + value  
 
-    const eventsLenght = GetTodayEvents(time).length + GetHolidays(time).length
+    const [ eventsLenght, setEventsLength ] = useState(0)
+    const [ isLoading, setIsLoading ] = useState(false)
+
+    useEffect(() => {
+        setIsLoading(true)
+        async function getEventsLength(){
+            if (format === "month") {
+                length = (await GetTodayEvents(time)).length + (await GetHolidays(time)).length
+                setEventsLength(length)
+            } else setEventsLength(0)
+
+            setIsLoading(false)
+        }
+        getEventsLength()
+    }, [])
 
     function handleOpenDay() {
         if(format !== "day") window.location.pathname = `calendar/day/${TwoDigitFormat(time.day)}-${TwoDigitFormat(time.month)}-${time.year}`
@@ -30,17 +46,15 @@ export function Day({ time, className, format }: DayProps) {
         <div className={className} onClick={handleOpenDay}>
             <div className={`flex items-center justify-center relative ${containerStyle}`}>
                 <p className={`${margin} text-center`}>{time.day}</p>
-                {
-                format === "month" && eventsLenght > 0 ?
+            {
+                eventsLenght > 0 || isLoading ?
                     <span className="h-6 w-6 absolute -top-4 -right-5 rounded-full bg-slate-600 dark:bg-slate-900 text-white items-center flex justify-center text-xs m-2">
-                        {eventsLenght}
+                        {isLoading ? <Loading type="spin" height={8} width={8} />  : eventsLenght}
                     </span>
                 : null
             }
             </div>
-            
             {weekday()}
-            
         </div>
     )
 }
