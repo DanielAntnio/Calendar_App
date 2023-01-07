@@ -1,10 +1,5 @@
 {
   "database": {
     "rules": "database.rules.json"
-  },
-  "hosting": {
-    "site": "calendarappbr",
-
-    "public": "src"
   }
 }

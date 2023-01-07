@@ -16,20 +16,10 @@ export function SignIn() {
     e.preventDefault()
     const auth = getAuth(app)
 
-    const verify =
-      !emailInput || emailInput.value === '' ||
-      !passwordInput || passwordInput.value === '' ||
-      !nameInput || nameInput.value === ''
-
-    if (verify) return alert("preencha todos os campos!")
+    if (!emailInput || !passwordInput || !nameInput) return alert("preencha todos os campos!")
     createUserWithEmailAndPassword(auth, emailInput.value, passwordInput.value)
       .then(result => {
-        updateProfile(
-          result.user, {
-          displayName: nameInput.value
-        }
-        )
-        window.location.href = './login'
+        updateProfile(result.user, { displayName: nameInput.value })
       })
       .catch((err) => {
         if (err.code === 'auth/invalid-email') alert("Email inválido!")
@@ -76,7 +66,7 @@ export function SignIn() {
             />
           </div>
           <div className="bg-slate-400/95 dark:bg-slate-800/80 hover:bg-slate-500 mb-4 h-8 w-64 rounded-sm flex flex-row items-center">
-          <button
+            <button
               title="Criar Conta"
               type="submit"
               className="bg-transparent cursor-pointer h-8 w-64 outline-none placeholder:text-slate-500/95"
