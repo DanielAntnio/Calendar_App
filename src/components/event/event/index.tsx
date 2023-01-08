@@ -18,19 +18,24 @@ export function Event({ event, time }: eventProps) {
 
     const duration = GetTimeByDayDate(end) - GetTimeByDayDate(start)
 
-    const HourString = (hour: Hour) => `${TwoDigitFormat(hour.hour)}:${TwoDigitFormat(hour.minute)}`
+    function HourString(hour: Hour) { return `${TwoDigitFormat(hour.hour)}:${TwoDigitFormat(hour.minute)}` }
+    function DayString(time: Time) { return `${TwoDigitFormat(time.day)}/${TwoDigitFormat(time.month)}/${time.year}` }
 
     const oneDayText = `${HourString(start.Hour)} - ${HourString(end.Hour)}`
+
+    function textAllDay(start: Time, end: Time, year: number) {
+        if (duration === 86340000) return "Todo o dia"
+        if (start.year === year && end.year === year) return `${DayString(start).slice(0, 5)} - ${DayString(end).slice(0, 5)}`
+        return `${DayString(start)} - ${DayString(end)}`
+    }
 
     function MultiDayText() {
         const allDay = HourString(start.Hour) === "00:00" && HourString(end.Hour) === "23:59"
 
-        const DayString = (time: Time) => `${TwoDigitFormat(time.day)}/${TwoDigitFormat(time.month)}/${time.year}`
-
-        if (allDay && duration === 86340000) return "Todo o dia"
-        if (allDay && start.Day.year === time.year && end.Day.year === time.year) return `${DayString(start.Day).slice(0, 5)} - ${DayString(end.Day).slice(0, 5)}`
-        if (allDay) return `${DayString(start.Day)} - ${DayString(end.Day)}`
-        if (start.Day.year === time.year && end.Day.year === time.year) return `${DayString(start.Day).slice(0, 5)} ${HourString(start.Hour)} - ${DayString(end.Day).slice(0, 5)} ${HourString(end.Hour)}`
+        if (allDay) return textAllDay(start.Day, end.Day, time.year)
+        if (start.Day.year === time.year && end.Day.year === time.year) {
+            return `${DayString(start.Day).slice(0, 5)} ${HourString(start.Hour)} - ${DayString(end.Day).slice(0, 5)} ${HourString(end.Hour)}`
+        }
         return `${DayString(start.Day)} ${HourString(start.Hour)} - ${DayString(end.Day)} ${HourString(end.Hour)}`
     }
 
